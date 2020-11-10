@@ -73,7 +73,7 @@ class JWT
 
     public function __construct()
     {
-        $this->config = array_merge($this->config, config('jwt.'));
+        $this->config = array_merge($this->config, config('jwt'));
     }
 
     /**
@@ -254,28 +254,5 @@ class JWT
     public function __call($name, $arguments)
     {
         throw new JWTBadMethodCallException("Method [$name] does not exist.");
-    }
-
-    /**
-     * @title 安装完成以后复制swagger文件
-     */
-    public static function copySwagger()
-    {
-        $sourceFile = __DIR__ . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.php';
-        $targetFile = config_path() . DIRECTORY_SEPARATOR . 'kk.php';
-        copy($sourceFile, $targetFile);
-        echo 2;
-    }
-
-    /**
-     * @title 卸载扩展包以后删除配置文件
-     */
-    public static function deleteConfig()
-    {
-        $configFile = config_path() . DIRECTORY_SEPARATOR . 'jwt.php';
-        if (file_exists($configFile)) {
-            echo 1;
-            unlink($configFile);
-        }
     }
 }
